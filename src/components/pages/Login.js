@@ -16,14 +16,21 @@ const useStyles = makeStyles({
     height: 50,
   },
   title: {
-    paddingTop: 100,
+    paddingTop: 25,
     paddingBottom: 25,
   },
   subtitle: {
     paddingBottom: 50,
   },
   list: {
-    border: '1px black solid',
+    border: '1px #2980B9 solid',
+    borderRadius: 5,
+  },
+  loginPage: {
+    backgroundColor: '#fff',
+    padding: 100,
+    marginTop: 50,
+    borderRadius: 5,
   },
 });
 
@@ -40,7 +47,7 @@ const mapDispatchToProps = {
 function Login(props) {
   const classes = useStyles();
   return (
-    <Grid container>
+    <Grid container className={classes.loginPage}>
       <Grid item xs={12}>
         <Typography align={'center'} variant="h1" className={classes.title}>
           Would You Rather?
@@ -61,8 +68,12 @@ function Login(props) {
               root: classes.list,
             }}
           >
-            {props.users.map((user) => (
-              <ListItem button onClick={() => props.setAuthedUser(user.id)}>
+            {props.users.map((user, i) => (
+              <ListItem
+                key={i}
+                button
+                onClick={() => props.setAuthedUser(user.id)}
+              >
                 <ListItemIcon>
                   <img
                     src={user.avatar}
