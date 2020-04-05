@@ -4,14 +4,34 @@ import { receiveAnswers } from './answers';
 
 const initialUsers = {
   '1': {
-    avatar: '',
-    name: 'Beto',
+    avatar: '/img/anna.png',
+    name: 'Anna',
     id: '1',
   },
   '2': {
-    avatar: '',
-    name: 'Mari',
+    avatar: '/img/claudia.png',
+    name: 'Claudia',
     id: '2',
+  },
+  '3': {
+    avatar: '/img/john.png',
+    name: 'John',
+    id: '3',
+  },
+  '4': {
+    avatar: '/img/maria.png',
+    name: 'Maria',
+    id: '4',
+  },
+  '5': {
+    avatar: '/img/paul.png',
+    name: 'Paul',
+    id: '5',
+  },
+  '6': {
+    avatar: '/img/tim.png',
+    name: 'Tim',
+    id: '6',
   },
 };
 

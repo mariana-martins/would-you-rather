@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared';
+import Login from './pages/Login';
+import Container from '@material-ui/core/Container';
 
 function mapStateToProps(state) {
   return {
@@ -25,18 +27,19 @@ class App extends Component {
     */
     return (
       <Router>
-        <div>
+        <Container>
           {/*<Nav />*/}
-          {!this.props.authedUser
-            ? // <Route path="/" exact component={Login} />
-              null
-            : // <Route path="/home" component={Home} />
-              // <Route path="/poll/:id" component={Poll} />
-              // <Route path="/new" component={NewPoll} />
-              // <Route path="/leaderboard" component={Leaderboard} />
-              null}
+          {!this.props.authedUser ? (
+            <Route path="/" exact component={Login} />
+          ) : (
+            // <Route path="/home" component={Home} />
+            // <Route path="/poll/:id" component={Poll} />
+            // <Route path="/new" component={NewPoll} />
+            // <Route path="/leaderboard" component={Leaderboard} />
+            <p>Logged: {this.props.authedUser}</p>
+          )}
           {/*<Route component={NoMatch} />*/}
-        </div>
+        </Container>
       </Router>
     );
   }
