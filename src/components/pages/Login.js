@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core/styles';
-import { grey } from '@material-ui/core/colors';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
   avatar: {
@@ -24,7 +24,6 @@ const useStyles = makeStyles({
   },
   list: {
     border: '1px #2980B9 solid',
-    borderRadius: 5,
   },
   loginPage: {
     backgroundColor: '#fff',
@@ -46,6 +45,11 @@ const mapDispatchToProps = {
 
 function Login(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const login = (user) => {
+    props.setAuthedUser(user.id);
+    history.push('/home');
+  };
   return (
     <Grid container className={classes.loginPage}>
       <Grid item xs={12}>
@@ -69,11 +73,7 @@ function Login(props) {
             }}
           >
             {props.users.map((user, i) => (
-              <ListItem
-                key={i}
-                button
-                onClick={() => props.setAuthedUser(user.id)}
-              >
+              <ListItem key={i} button onClick={() => login(user)}>
                 <ListItemIcon>
                   <img
                     src={user.avatar}
