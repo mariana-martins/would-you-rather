@@ -13,6 +13,7 @@ import { handleInitialData } from '../actions/shared';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
+import MenuAppBar from './MenuAppBar';
 
 const PrivateRoute = ({ component: Component, isAuth, ...rest }) => (
   <Route
@@ -55,9 +56,9 @@ class App extends Component {
     */
     return (
       <Router>
+        <MenuAppBar />
         <Container>
           <Switch>
-            {/*<Nav />*/}
             <Route path="/" exact component={Login} />
             <PrivateRoute path="/home" component={Home} isAuth={authedUser} />
             <Route component={NoMatch} />
