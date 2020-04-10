@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
   avatar: {
@@ -36,6 +37,7 @@ const useStyles = makeStyles({
 const mapStateToProps = (state) => {
   return {
     users: Object.values(state.users),
+    loading: state.loading,
   };
 };
 
@@ -66,27 +68,33 @@ function Login(props) {
       </Grid>
       <Grid container justify={'center'}>
         <Grid item xs={3}>
-          <List
-            component={'nav'}
-            classes={{
-              root: classes.list,
-            }}
-          >
-            {props.users.map((user, i) => (
-              <ListItem key={i} button onClick={() => login(user)}>
-                <ListItemIcon>
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className={classes.avatar}
-                  />
-                </ListItemIcon>
-                <ListItemText>
-                  {user.name} (id: {user.id})
-                </ListItemText>
-              </ListItem>
-            ))}
-          </List>
+          {props.loading && (
+            <Grid container item justify={'center'}>
+              <CircularProgress />
+            </Grid>
+          )}
+          {!props.loading && (
+            <List
+              component={'nav'}
+              classes={{
+                root: classes.list,
+              }}
+            >
+              {props.users &&
+                props.users.map((user, i) => (
+                  <ListItem key={i} button onClick={() => login(user)}>
+                    <ListItemIcon>
+                      <img
+                        src={user.avatarURL}
+                        alt={user.name}
+                        className={classes.avatar}
+                      />
+                    </ListItemIcon>
+                    <ListItemText>{user.name}</ListItemText>
+                  </ListItem>
+                ))}
+            </List>
+          )}
         </Grid>
       </Grid>
     </Grid>
