@@ -4,7 +4,7 @@ import { receiveAnswers } from './answers';
 
 const initialUsers = {
   '1': {
-    avatar: '/img/anna.png',
+    avatar: '/img/sarah.png',
     name: 'Anna',
     id: '1',
   },
@@ -24,7 +24,7 @@ const initialUsers = {
     id: '4',
   },
   '5': {
-    avatar: '/img/paul.png',
+    avatar: '/img/tyler.png',
     name: 'Paul',
     id: '5',
   },
