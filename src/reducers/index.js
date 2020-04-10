@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import authedUser from './authedUser';
 import users from './users';
-import polls from './polls';
-import answers from './answers';
-import filterPollByAnswered from './filterPollByAnswered';
+import questions from './questions';
+import filterQuestionsByAnswered from './filterQuestionsByAnswered';
+import { loadingBarReducer } from 'react-redux-loading';
 
 export default combineReducers({
   authedUser,
   users,
-  polls,
-  answers,
-  filterPollByAnswered,
+  questions,
+  filterQuestionsByAnswered,
+  loadingBar: loadingBarReducer,
 });

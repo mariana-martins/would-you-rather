@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleFilter } from '../../actions/filterPollByAnswered';
+import { toggleFilter } from '../../actions/filterQuestionsByAnswered';
 
 const mapStateToProps = (state) => {
   const answeredPollIds = state.answers

@@ -1,60 +1,17 @@
 import { receiveUsers } from './users';
-import { receivePolls } from './polls';
-import { receiveAnswers } from './answers';
-
-const initialUsers = {
-  '1': {
-    avatar: '/img/sarah.png',
-    name: 'Anna',
-    id: '1',
-  },
-  '2': {
-    avatar: '/img/claudia.png',
-    name: 'Claudia',
-    id: '2',
-  },
-  '3': {
-    avatar: '/img/john.png',
-    name: 'John',
-    id: '3',
-  },
-  '4': {
-    avatar: '/img/maria.png',
-    name: 'Maria',
-    id: '4',
-  },
-  '5': {
-    avatar: '/img/tyler.png',
-    name: 'Paul',
-    id: '5',
-  },
-  '6': {
-    avatar: '/img/tim.png',
-    name: 'Tim',
-    id: '6',
-  },
-};
-
-const initialPolls = {
-  '1': {
-    id: '1',
-    options: ['eat burger', 'eat pizza'],
-    author: '1',
-  },
-};
-
-const initialAnswers = [
-  {
-    userId: '1',
-    pollId: '1',
-    optionIndex: 0,
-  },
-];
+import { receiveQuestions } from './questions';
+import { getInitialData } from '../utils/API';
+import { setAuthedUser } from './authedUser';
+import { showLoading, hideLoading } from 'react-redux-loading';
 
 export function handleInitialData() {
   return (dispatch) => {
-    dispatch(receiveUsers(initialUsers));
-    dispatch(receivePolls(initialPolls));
-    dispatch(receiveAnswers(initialAnswers));
+    dispatch(showLoading());
+    return getInitialData().then(({ users, questions }) => {
+      dispatch(receiveUsers(users));
+      dispatch(receiveQuestions(questions));
+      dispatch(setAuthedUser(null));
+      dispatch(hideLoading());
+    });
   };
 }
