@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import Switch from '@material-ui/core/Switch';
 
 const mapStateToProps = (state) => {
   const answeredQuestionIds = Object.keys(
@@ -36,7 +37,18 @@ function Home(props) {
   return (
     <Grid container justify={'center'} style={{ backgroundColor: '#fff' }}>
       <Grid item container justify={'center'}>
-        Toggle
+        <Typography component="div">
+          <Grid component="label" container alignItems="center" spacing={1}>
+            <Grid item>Not Answered</Grid>
+            <Grid item>
+              <Switch
+                checked={props.filterQuestionsByAnswered}
+                onChange={props.toggleFilter}
+              />
+            </Grid>
+            <Grid item>Answered</Grid>
+          </Grid>
+        </Typography>
       </Grid>
       <Grid item xs={6}>
         <List>
