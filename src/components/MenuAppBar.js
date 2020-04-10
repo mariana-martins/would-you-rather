@@ -96,7 +96,7 @@ function MenuAppBar(props) {
               >
                 <Avatar
                   alt={props.authedUser.name}
-                  src={props.authedUser.avatar}
+                  src={props.authedUser.avatarURL}
                 />
                 <Typography variant={'body2'}>
                   {props.authedUser.name}
