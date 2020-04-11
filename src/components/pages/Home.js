@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import Loading from '../Loading';
+import { useHistory } from 'react-router';
 
 const mapStateToProps = (state) => {
   const answeredQuestionIds = Object.keys(
@@ -35,6 +36,7 @@ const mapDispatchToProps = {
 };
 
 function Home(props) {
+  const history = useHistory();
   return (
     <Grid container justify={'center'} style={{ backgroundColor: '#fff' }}>
       <Loading>
@@ -56,7 +58,11 @@ function Home(props) {
           <List>
             {props.filteredQuestions.map((question) => (
               <div key={question.id}>
-                <ListItem alignItems="flex-start">
+                <ListItem
+                  alignItems="flex-start"
+                  button
+                  onClick={() => history.push(`/question/${question.id}`)}
+                >
                   <ListItemAvatar>
                     <Avatar
                       alt={props.users[question.author].name}

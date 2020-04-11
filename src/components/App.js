@@ -16,6 +16,7 @@ import NoMatch from './pages/NoMatch';
 import MenuAppBar from './MenuAppBar';
 import Leaderboard from './pages/Leaderboard';
 import NewQuestion from './pages/NewQuestion';
+import Question from './pages/Question';
 
 const PrivateRoute = ({ component: Component, isAuth, ...rest }) => (
   <Route
@@ -73,8 +74,12 @@ class App extends Component {
               component={NewQuestion}
               isAuth={authedUser}
             />
+            <PrivateRoute
+              path="/question/:id"
+              component={Question}
+              isAuth={authedUser}
+            />
             <Route component={NoMatch} />
-            {/*<Route path="/poll/:id" component={Poll} />*/}
           </Switch>
         </Container>
       </Router>
