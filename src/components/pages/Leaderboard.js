@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { toggleFilter } from '../../actions/filterQuestionsByAnswered';
 import Typography from '@material-ui/core/Typography';
+import Loading from '../Loading';
 
 const mapStateToProps = (state) => {
   const users = Object.values(state.users).map((user) => ({
@@ -35,28 +36,30 @@ function Leaderboard(props) {
   return (
     <>
       <Typography variant={'h4'}>Leaderboard</Typography>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>User</TableCell>
-              <TableCell>No. Questions</TableCell>
-              <TableCell>No. Answers</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {props.users.map((user) => (
-              <TableRow key={user.name}>
-                <TableCell component="th" scope="row">
-                  {user.name}
-                </TableCell>
-                <TableCell>{user.questions}</TableCell>
-                <TableCell>{user.answers}</TableCell>
+      <Loading>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>User</TableCell>
+                <TableCell>No. Questions</TableCell>
+                <TableCell>No. Answers</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {props.users.map((user) => (
+                <TableRow key={user.name}>
+                  <TableCell component="th" scope="row">
+                    {user.name}
+                  </TableCell>
+                  <TableCell>{user.questions}</TableCell>
+                  <TableCell>{user.answers}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Loading>
     </>
   );
 }

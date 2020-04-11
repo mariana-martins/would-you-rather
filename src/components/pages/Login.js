@@ -9,7 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loading from '../Loading';
 
 const useStyles = makeStyles({
   avatar: {
@@ -37,7 +37,6 @@ const useStyles = makeStyles({
 const mapStateToProps = (state) => {
   return {
     users: Object.values(state.users),
-    loading: state.loading,
   };
 };
 
@@ -68,12 +67,7 @@ function Login(props) {
       </Grid>
       <Grid container justify={'center'}>
         <Grid item xs={3}>
-          {props.loading && (
-            <Grid container item justify={'center'}>
-              <CircularProgress />
-            </Grid>
-          )}
-          {!props.loading && (
+          <Loading>
             <List
               component={'nav'}
               classes={{
@@ -94,7 +88,7 @@ function Login(props) {
                   </ListItem>
                 ))}
             </List>
-          )}
+          </Loading>
         </Grid>
       </Grid>
     </Grid>
