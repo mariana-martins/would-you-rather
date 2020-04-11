@@ -53,7 +53,7 @@ function Home(props) {
       <Grid item xs={6}>
         <List>
           {props.filteredQuestions.map((question) => (
-            <>
+            <div key={question.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar
@@ -79,7 +79,7 @@ function Home(props) {
                 />
               </ListItem>
               <Divider variant="inset" component="li" />
-            </>
+            </div>
           ))}
         </List>
       </Grid>
