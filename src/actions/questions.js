@@ -1,5 +1,10 @@
 import { setHideLoading, setShowLoading } from './loading';
-import { getInitialData, getUsers, saveQuestion } from '../utils/API';
+import {
+  getInitialData,
+  getUsers,
+  saveQuestion,
+  saveQuestionAnswer,
+} from '../utils/API';
 import { receiveUsers } from './users';
 import { setAuthedUser } from './authedUser';
 import users from '../reducers/users';
@@ -31,6 +36,19 @@ export function handleSaveQuestion(question) {
       })
       .then((users) => {
         dispatch(receiveUsers(users));
+        dispatch(setHideLoading());
+      });
+  };
+}
+
+export function handleSaveQuestionAnswer(answer) {
+  return (dispatch) => {
+    dispatch(setShowLoading());
+    return saveQuestionAnswer(answer)
+      .then(getInitialData)
+      .then(({ users, questions }) => {
+        dispatch(receiveUsers(users));
+        dispatch(receiveQuestions(questions));
         dispatch(setHideLoading());
       });
   };
