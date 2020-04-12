@@ -24,7 +24,13 @@ function Question() {
   const history = useHistory();
 
   const answered = user.answers[id] !== undefined;
-
+  const calculatePercentage = (option, total) =>
+    ((100 * option) / total).toFixed(2);
+  const votes = {
+    optionOne: question.optionOne.votes.length,
+    optionTwo: question.optionTwo.votes.length,
+    total: question.optionOne.votes.length + question.optionTwo.votes.length,
+  };
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -58,13 +64,33 @@ function Question() {
                   >
                     <FormControlLabel
                       value="optionOne"
-                      control={<Radio required />}
-                      label={question.optionOne.text}
+                      control={<Radio required disabled={answered} />}
+                      label={
+                        <RadioLabel
+                          answered={answered}
+                          text={question.optionOne.text}
+                          votes={votes.optionOne}
+                          percentage={calculatePercentage(
+                            votes.optionOne,
+                            votes.total
+                          )}
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="optionTwo"
-                      control={<Radio required />}
-                      label={question.optionTwo.text}
+                      control={<Radio required disabled={answered} />}
+                      label={
+                        <RadioLabel
+                          answered={answered}
+                          text={question.optionTwo.text}
+                          votes={votes.optionTwo}
+                          percentage={calculatePercentage(
+                            votes.optionTwo,
+                            votes.total
+                          )}
+                        />
+                      }
                     />
                   </RadioGroup>
                 </FormControl>
@@ -74,14 +100,34 @@ function Question() {
                 <span>{author.name}</span>
               </Grid>
               <Grid item xs={6}>
-                <Button variant={'contained'} color={'primary'} type={'submit'}>
-                  Submit
-                </Button>
+                {!answered && (
+                  <Button
+                    variant={'contained'}
+                    color={'primary'}
+                    type={'submit'}
+                  >
+                    Submit
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </form>
         </Paper>
       </Loading>
+    </>
+  );
+}
+
+function RadioLabel(props) {
+  return (
+    <>
+      {props.text}
+      {props.answered && (
+        <span>
+          {' — '}
+          Total: {props.votes} ({props.percentage}%)
+        </span>
+      )}
     </>
   );
 }
