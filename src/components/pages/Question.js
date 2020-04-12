@@ -19,81 +19,71 @@ function Question() {
   const question = useSelector((state) => state.questions[id]);
   const user = useSelector((state) => state.users[state.authedUser]);
   const author = useSelector((state) => state.users[question.author]);
-
-  const answered = user.answers[id] !== undefined;
-  return (
-    <>
-      <Typography variant={'h4'}>Would you rather?</Typography>
-      <Loading>
-        {answered ? (
-          <QuestionStats question={question} user={user} author={author} />
-        ) : (
-          <AnswerQuestion question={question} user={user} author={author} />
-        )}
-      </Loading>
-    </>
-  );
-}
-
-export default Question;
-
-function AnswerQuestion(props) {
   const [value, setValue] = React.useState('');
   const dispatch = useDispatch();
-  const saveQuestionAnswer = useCallback(handleSaveQuestionAnswer, [dispatch]);
   const history = useHistory();
+
+  const answered = user.answers[id] !== undefined;
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   const handleSubmit = (e) => {
-    console.log(e);
     e.preventDefault();
-    saveQuestionAnswer({
-      authedUser: props.user.id,
-      qid: props.question.id,
+    const answer = {
+      authedUser: user.id,
+      qid: question.id,
       answer: value,
-    });
+    };
+    handleSaveQuestionAnswer(answer)(dispatch);
     history.push('/home');
   };
-
   return (
-    <Paper>
-      <form onSubmit={handleSubmit}>
-        <Grid container>
-          <Grid item xs={12}>
-            <FormControl component="fieldset" required>
-              <FormLabel component="legend">Select one option below:</FormLabel>
-              <RadioGroup name="options" value={value} onChange={handleChange}>
-                <FormControlLabel
-                  value="optionOne"
-                  control={<Radio />}
-                  label={props.question.optionOne.text}
-                />
-                <FormControlLabel
-                  value="optionTwo"
-                  control={<Radio />}
-                  label={props.question.optionTwo.text}
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <Avatar alt={props.author.name} src={props.author.avatarURL} />
-            <span>{props.author.name}</span>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant={'contained'} color={'primary'} type={'submit'}>
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-    </Paper>
+    <>
+      <Typography variant={'h4'}>Would you rather?</Typography>
+      <Loading>
+        <Paper>
+          <form onSubmit={handleSubmit}>
+            <Grid container>
+              <Grid item xs={12}>
+                <FormControl component="fieldset" required>
+                  <FormLabel component="legend">
+                    Select one option below:
+                  </FormLabel>
+                  <RadioGroup
+                    name="options"
+                    value={value}
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel
+                      value="optionOne"
+                      control={<Radio />}
+                      label={question.optionOne.text}
+                    />
+                    <FormControlLabel
+                      value="optionTwo"
+                      control={<Radio />}
+                      label={question.optionTwo.text}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <Avatar alt={author.name} src={author.avatarURL} />
+                <span>{author.name}</span>
+              </Grid>
+              <Grid item xs={6}>
+                <Button variant={'contained'} color={'primary'} type={'submit'}>
+                  Submit
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </Loading>
+    </>
   );
 }
 
-function QuestionStats(props) {
-  return <div>lelele</div>;
-}
+export default Question;
