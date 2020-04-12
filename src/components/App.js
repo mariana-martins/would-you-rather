@@ -70,12 +70,12 @@ class App extends Component {
               isAuth={authedUser}
             />
             <PrivateRoute
-              path="/new"
+              path="/add"
               component={NewQuestion}
               isAuth={authedUser}
             />
             <PrivateRoute
-              path="/question/:id"
+              path="/questions/:id"
               component={Question}
               isAuth={authedUser}
             />

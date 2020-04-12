@@ -24,6 +24,10 @@ const mapStateToProps = (state) => {
       state.filterQuestionsByAnswered
   );
 
+  filteredQuestions.sort((a, b) => {
+    return b.timestamp - a.timestamp;
+  });
+
   return {
     filterQuestionsByAnswered: state.filterQuestionsByAnswered,
     filteredQuestions: filteredQuestions,
@@ -61,7 +65,7 @@ function Home(props) {
                 <ListItem
                   alignItems="flex-start"
                   button
-                  onClick={() => history.push(`/question/${question.id}`)}
+                  onClick={() => history.push(`/questions/${question.id}`)}
                 >
                   <ListItemAvatar>
                     <Avatar

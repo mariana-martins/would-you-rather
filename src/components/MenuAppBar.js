@@ -75,7 +75,7 @@ function MenuAppBar(props) {
               </Link>
               <Link
                 component={RouterLink}
-                to={'/new'}
+                to={'/add'}
                 className={classes.title}
                 color="inherit"
                 variant="body1"

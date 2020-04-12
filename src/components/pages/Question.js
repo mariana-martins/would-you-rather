@@ -21,7 +21,6 @@ function Question() {
   const author = useSelector((state) => state.users[question.author]);
   const [value, setValue] = React.useState(user.answers[id] || '');
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const answered = user.answers[id] !== undefined;
   const calculatePercentage = (option, total) =>
@@ -43,7 +42,6 @@ function Question() {
       answer: value,
     };
     handleSaveQuestionAnswer(answer)(dispatch);
-    history.push('/home');
   };
   return (
     <>
