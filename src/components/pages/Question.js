@@ -19,7 +19,7 @@ function Question() {
   const question = useSelector((state) => state.questions[id]);
   const user = useSelector((state) => state.users[state.authedUser]);
   const author = useSelector((state) => state.users[question.author]);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(user.answers[id] || '');
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -47,7 +47,7 @@ function Question() {
           <form onSubmit={handleSubmit}>
             <Grid container>
               <Grid item xs={12}>
-                <FormControl component="fieldset" required>
+                <FormControl component="fieldset">
                   <FormLabel component="legend">
                     Select one option below:
                   </FormLabel>
@@ -58,12 +58,12 @@ function Question() {
                   >
                     <FormControlLabel
                       value="optionOne"
-                      control={<Radio />}
+                      control={<Radio required />}
                       label={question.optionOne.text}
                     />
                     <FormControlLabel
                       value="optionTwo"
-                      control={<Radio />}
+                      control={<Radio required />}
                       label={question.optionTwo.text}
                     />
                   </RadioGroup>
