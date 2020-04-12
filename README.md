@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Udacity Nano-Degree Project: **Would You Rather?**
 
-## Available Scripts
+This is a mandatory project to complete Udacity React Nano Degree.
+The goal here is to implement an App to lets a user play the _Would You Rather?_ game.
 
-In the project directory, you can run:
+**How does it work?**
 
-### `yarn start`
+A question with two options is going to be displayed and a user needs to choose one option. 
+The user isn't allowed to select both options or any option. 
+Users can create new questions and verify his/her score on the Leaderboard page. 
+It shows how many questions users answered and how many questions users created.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to Run
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* Run: `git clone https://github.com/mariana-martins/would-you-rather.git`
+* Open your terminal on project's folder
+* Run `npm install` on Terminal to install all project dependencies
+* Run `npm start` on Terminal to start the development server
 
-### `yarn test`
+## Project Structure
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project uses the following folders as its architecture.
 
-### `yarn build`
+* public: contains static files
+* src/actions: contains the Redux action files
+* src/components: contains shared components across several pages. 
+* src/components/pages: contains components representing pages on this project.
+* src/middlewares: contains the Redux middlewares files 
+* src/reducers: contains the Redux Reducers files
+* src/utils: contains `_DATA.js` and `API.js`. Files to provide data and simulate the backend of the application.
+* src/actions: contains the Redux action files
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Udacity API integration
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The `_DATA.js` is a file provided by Udacity [in this repository](https://github.com/udacity/reactnd-project-would-you-rather-starter).
+This file is more like a fake database and it contains methods to access the data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
