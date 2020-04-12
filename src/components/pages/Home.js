@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleFilter } from '../../actions/filterQuestionsByAnswered';
+import { useHistory } from 'react-router';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -10,8 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
+import { toggleFilter } from '../../actions/filterQuestionsByAnswered';
+import BaseContainer from '../BaseContainer';
 import Loading from '../Loading';
-import { useHistory } from 'react-router';
 
 const mapStateToProps = (state) => {
   const answeredQuestionIds = Object.keys(
@@ -42,19 +43,24 @@ const mapDispatchToProps = {
 function Home(props) {
   const history = useHistory();
   return (
-    <Grid container justify={'center'} style={{ backgroundColor: '#fff' }}>
+    <BaseContainer justify={'center'}>
+      <Grid item container justify={'center'}>
+        <Typography variant={'h4'} style={{ paddingBottom: 50 }}>
+          Would you rather?
+        </Typography>
+      </Grid>
       <Loading>
         <Grid item container justify={'center'}>
           <Typography component="div">
             <Grid component="label" container alignItems="center" spacing={1}>
-              <Grid item>Not Answered</Grid>
+              <Grid item>Questions Not Answered</Grid>
               <Grid item>
                 <Switch
                   checked={props.filterQuestionsByAnswered}
                   onChange={props.toggleFilter}
                 />
               </Grid>
-              <Grid item>Answered</Grid>
+              <Grid item>Questions Already Answered</Grid>
             </Grid>
           </Typography>
         </Grid>
@@ -74,20 +80,8 @@ function Home(props) {
                     />
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Would you rather?"
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                          style={{ display: 'inline' }}
-                        >
-                          {props.users[question.author].name}
-                        </Typography>
-                        {' — '} {question.optionOne.text}...
-                      </React.Fragment>
-                    }
+                    primary={props.users[question.author].name}
+                    secondary={`${question.optionOne.text}...`}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
@@ -96,7 +90,7 @@ function Home(props) {
           </List>
         </Grid>
       </Loading>
-    </Grid>
+    </BaseContainer>
   );
 }
 

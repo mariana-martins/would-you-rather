@@ -6,8 +6,6 @@ import {
   saveQuestionAnswer,
 } from '../utils/API';
 import { receiveUsers } from './users';
-import { setAuthedUser } from './authedUser';
-import users from '../reducers/users';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION';

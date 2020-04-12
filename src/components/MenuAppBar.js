@@ -1,18 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Container from '@material-ui/core/Container';
-import { connect } from 'react-redux';
-import { unsetAuthedUser } from '../actions/authedUser';
-import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
+import { unsetAuthedUser } from '../actions/authedUser';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -98,8 +97,8 @@ function MenuAppBar(props) {
                   alt={props.authedUser.name}
                   src={props.authedUser.avatarURL}
                 />
-                <Typography variant={'body2'}>
-                  {props.authedUser.name}
+                <Typography variant={'body2'} style={{ paddingLeft: 10 }}>
+                  Hello, {props.authedUser.name}!
                 </Typography>
               </IconButton>
               <Menu

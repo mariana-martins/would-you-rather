@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthedUser } from '../../actions/authedUser';
+import { useHistory } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -8,8 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
 import Loading from '../Loading';
+import BaseContainer from '../BaseContainer';
+import { setAuthedUser } from '../../actions/authedUser';
 
 const useStyles = makeStyles({
   avatar: {
@@ -22,15 +23,6 @@ const useStyles = makeStyles({
   },
   subtitle: {
     paddingBottom: 50,
-  },
-  list: {
-    border: '1px #2980B9 solid',
-  },
-  loginPage: {
-    backgroundColor: '#fff',
-    padding: 100,
-    marginTop: 50,
-    borderRadius: 5,
   },
 });
 
@@ -52,7 +44,7 @@ function Login(props) {
     history.push('/home');
   };
   return (
-    <Grid container className={classes.loginPage}>
+    <BaseContainer>
       <Grid item xs={12}>
         <Typography align={'center'} variant="h1" className={classes.title}>
           Would You Rather?
@@ -62,7 +54,7 @@ function Login(props) {
           variant="subtitle1"
           className={classes.subtitle}
         >
-          Select an user to log in
+          Select a user to log in
         </Typography>
       </Grid>
       <Grid container justify={'center'}>
@@ -91,7 +83,7 @@ function Login(props) {
           </Loading>
         </Grid>
       </Grid>
-    </Grid>
+    </BaseContainer>
   );
 }
 

@@ -1,8 +1,8 @@
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
-import { getInitialData } from '../utils/API';
 import { setAuthedUser } from './authedUser';
 import { setHideLoading, setShowLoading } from './loading';
+import { getInitialData } from '../utils/API';
 
 export function handleInitialData() {
   return (dispatch) => {

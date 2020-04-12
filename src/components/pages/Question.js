@@ -1,18 +1,17 @@
-import React, { useCallback } from 'react';
-import Loading from '../Loading';
-import Typography from '@material-ui/core/Typography';
-import { useHistory, useParams } from 'react-router';
+import React from 'react';
+import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import FormLabel from '@material-ui/core/FormLabel';
 import Avatar from '@material-ui/core/Avatar';
 import { handleSaveQuestionAnswer } from '../../actions/questions';
+import BaseContainer from '../BaseContainer';
+import Loading from '../Loading';
 
 function Question() {
   const { id } = useParams();
@@ -44,24 +43,38 @@ function Question() {
     handleSaveQuestionAnswer(answer)(dispatch);
   };
   return (
-    <>
-      <Typography variant={'h4'}>Would you rather?</Typography>
+    <BaseContainer>
       <Loading>
-        <Paper>
+        <Grid container item justify={'center'} xs={12}>
+          <Typography variant={'h4'} style={{ paddingBottom: 15 }}>
+            Would you rather?
+          </Typography>
+          <Grid container item justify={'center'} xs={12}>
+            {!answered && (
+              <Typography
+                align={'center'}
+                variant="subtitle1"
+                style={{ paddingBottom: 40 }}
+              >
+                Select one option below
+              </Typography>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container item justify={'center'} xs={12}>
           <form onSubmit={handleSubmit}>
             <Grid container>
               <Grid item xs={12}>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">
-                    Select one option below:
-                  </FormLabel>
                   <RadioGroup
                     name="options"
                     value={value}
                     onChange={handleChange}
+                    style={{ marginBottom: 50 }}
                   >
                     <FormControlLabel
                       value="optionOne"
+                      className="question-label"
                       control={<Radio required disabled={answered} />}
                       label={
                         <RadioLabel
@@ -77,6 +90,7 @@ function Question() {
                     />
                     <FormControlLabel
                       value="optionTwo"
+                      className="question-label"
                       control={<Radio required disabled={answered} />}
                       label={
                         <RadioLabel
@@ -93,15 +107,17 @@ function Question() {
                   </RadioGroup>
                 </FormControl>
               </Grid>
-              <Grid item xs={6}>
+              <Grid container item xs={6} alignItems={'center'}>
                 <Avatar alt={author.name} src={author.avatarURL} />
-                <span>{author.name}</span>
+                <span style={{ paddingLeft: 10, fontStyle: 'italic' }}>
+                  {author.name} made this poll.
+                </span>
               </Grid>
-              <Grid item xs={6}>
+              <Grid container item xs={6} justify={'flex-end'}>
                 {!answered && (
                   <Button
                     variant={'contained'}
-                    color={'primary'}
+                    color={'secondary'}
                     type={'submit'}
                   >
                     Submit
@@ -110,23 +126,24 @@ function Question() {
               </Grid>
             </Grid>
           </form>
-        </Paper>
+        </Grid>
       </Loading>
-    </>
+    </BaseContainer>
   );
 }
 
 function RadioLabel(props) {
   return (
-    <>
+    <Typography>
       {props.text}
       {props.answered && (
         <span>
           {' — '}
-          Total: {props.votes} ({props.percentage}%)
+          This option had {props.votes} {props.votes > 1 ? 'votes' : 'vote'} in
+          total ({props.percentage}%).
         </span>
       )}
-    </>
+    </Typography>
   );
 }
 

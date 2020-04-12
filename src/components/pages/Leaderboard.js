@@ -1,15 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
-import Paper from '@material-ui/core/Paper';
-import { connect } from 'react-redux';
-import { toggleFilter } from '../../actions/filterQuestionsByAnswered';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
 import Loading from '../Loading';
+import BaseContainer from '../BaseContainer';
 
 const mapStateToProps = (state) => {
   const users = Object.values(state.users).map((user) => ({
@@ -34,33 +35,51 @@ const mapDispatchToProps = {};
 
 function Leaderboard(props) {
   return (
-    <>
-      <Typography variant={'h4'}>Leaderboard</Typography>
-      <Loading>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>User</TableCell>
-                <TableCell>No. Questions</TableCell>
-                <TableCell>No. Answers</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {props.users.map((user) => (
-                <TableRow key={user.name}>
-                  <TableCell component="th" scope="row">
-                    {user.name}
+    <BaseContainer>
+      <Grid container item justify={'center'} xs={12}>
+        <Typography variant={'h4'} style={{ paddingBottom: 15 }}>
+          Would you rather?
+        </Typography>
+      </Grid>
+      <Grid container item justify={'center'} xs={12}>
+        <Typography variant={'h6'} style={{ paddingBottom: 15 }}>
+          Leaderboard
+        </Typography>
+      </Grid>
+      <Grid container item justify={'center'} xs={12}>
+        <Loading>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell style={{ fontWeight: 'bold' }}>User</TableCell>
+                  <TableCell align={'center'} style={{ fontWeight: 'bold' }}>
+                    No. Questions
                   </TableCell>
-                  <TableCell>{user.questions}</TableCell>
-                  <TableCell>{user.answers}</TableCell>
+                  <TableCell align={'center'} style={{ fontWeight: 'bold' }}>
+                    No. Answers
+                  </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Loading>
-    </>
+              </TableHead>
+              <TableBody>
+                {props.users.map((user) => (
+                  <TableRow key={user.name}>
+                    <TableCell component="th" scope="row">
+                      <Grid container item alignItems={'center'}>
+                        <Avatar alt={user.name} src={user.avatarURL} />
+                        <span style={{ paddingLeft: 10 }}>{user.name}</span>
+                      </Grid>
+                    </TableCell>
+                    <TableCell align={'center'}>{user.questions}</TableCell>
+                    <TableCell align={'center'}>{user.answers}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Loading>
+      </Grid>
+    </BaseContainer>
   );
 }
 

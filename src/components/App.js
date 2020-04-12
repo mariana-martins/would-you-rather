@@ -6,17 +6,27 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import Container from '@material-ui/core/Container';
-
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { handleInitialData } from '../actions/shared';
+import MenuAppBar from './MenuAppBar';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
-import MenuAppBar from './MenuAppBar';
 import Leaderboard from './pages/Leaderboard';
 import NewQuestion from './pages/NewQuestion';
 import Question from './pages/Question';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#F05D5E',
+    },
+    secondary: {
+      main: '#C5D86D',
+    },
+  },
+});
 
 const PrivateRoute = ({ component: Component, isAuth, ...rest }) => (
   <Route
@@ -48,41 +58,34 @@ class App extends Component {
   }
   render() {
     const authedUser = this.props.authedUser;
-    /*
-    TODO: Adicionar paginas
-      - Autenticação
-      - Home
-      - Pergunta
-      - Add Pergunta
-      - Leaderboard
-      - 404
-    */
     return (
-      <Router>
-        <MenuAppBar />
-        <Container>
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <PrivateRoute path="/home" component={Home} isAuth={authedUser} />
-            <PrivateRoute
-              path="/leaderboard"
-              component={Leaderboard}
-              isAuth={authedUser}
-            />
-            <PrivateRoute
-              path="/add"
-              component={NewQuestion}
-              isAuth={authedUser}
-            />
-            <PrivateRoute
-              path="/questions/:id"
-              component={Question}
-              isAuth={authedUser}
-            />
-            <Route component={NoMatch} />
-          </Switch>
-        </Container>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <MenuAppBar />
+          <Container>
+            <Switch>
+              <Route path="/" exact component={Login} />
+              <PrivateRoute path="/home" component={Home} isAuth={authedUser} />
+              <PrivateRoute
+                path="/leaderboard"
+                component={Leaderboard}
+                isAuth={authedUser}
+              />
+              <PrivateRoute
+                path="/add"
+                component={NewQuestion}
+                isAuth={authedUser}
+              />
+              <PrivateRoute
+                path="/questions/:id"
+                component={Question}
+                isAuth={authedUser}
+              />
+              <Route component={NoMatch} />
+            </Switch>
+          </Container>
+        </Router>
+      </ThemeProvider>
     );
   }
 }
